@@ -25,3 +25,6 @@ dist-ssr
 
 #Eviroment
 .env
+
+#WORKFLOWS
+/.github
