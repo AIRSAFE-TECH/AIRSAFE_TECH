@@ -15,9 +15,9 @@ const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
 onBackgroundMessage(messaging, (payload) => {
-    console.log("Notificación en segundo plano: ", payload);
-    self.registration.showNotification(payload.notification.title, {
-      body: payload.notification.body,
-      icon: "/icon.png",
-    });
+  console.log("Notificación recibida en segundo plano:", payload);
+  self.registration.showNotification(payload.notification.title, {
+    body: payload.notification.body,
+    icon: "/icon.png",
   });
+});
