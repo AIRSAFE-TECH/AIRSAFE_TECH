@@ -17,6 +17,7 @@ export function useWebSocket(url) {
             };
 
             socket.onmessage = (event) => {
+                
                 setMessages((prev) => [...prev, event.data]);
             };
 

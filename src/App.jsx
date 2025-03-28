@@ -1,13 +1,10 @@
-import './App.css'
-import WebSocketPage from './presentation/ui/pages/WebSocketPage'
+import Register from "./presentation/ui/pages/Register";
 
 function App() {
-
+ 
   return (
-    <>
-    <WebSocketPage></WebSocketPage>
-    </>
-  )
+    <Register/>
+  );
 }
 
-export default App
+export default App;
