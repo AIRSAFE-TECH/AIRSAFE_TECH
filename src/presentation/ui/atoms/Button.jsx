@@ -1,6 +1,6 @@
-function Button({ text, className }) {
+function Button({ text, className,type }) {
     return (
-        <button type="submit" className={className}>
+        <button type={type} className={className}>
             {text}
         </button>
     );

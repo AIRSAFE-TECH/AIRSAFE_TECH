@@ -2,7 +2,6 @@ import { useRegisterViewModel } from "../../viewmodel/user/userRegisterViewModel
 import Label from "../atoms/Label";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-
 import showPassIcon from "/media/icons/show-pass.png";
 import hidePassIcon from "/media/icons/hide-pass.png";
 
@@ -32,7 +31,6 @@ function FormRegister() {
             <div className="md:col-span-2">
                 <Label text="Teléfono" />
                 <Input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} placeholder="Ej: 9611112345" maxLength="10"/>
-
             </div>
 
             <div className="relative">
@@ -52,7 +50,11 @@ function FormRegister() {
             </div>
 
             <div className="md:col-span-2">
-                <Button text="Registrarse" className="w-full bg-[#266bb4] text-white py-3 rounded-md hover:bg-[#52738c] transition" />
+                <Button 
+                    text="Registrarse" 
+                    type="submit" 
+                    className="w-full bg-[#266bb4] text-white py-3 rounded-md hover:bg-[#52738c] transition" 
+                />
             </div>
         </form>
     );

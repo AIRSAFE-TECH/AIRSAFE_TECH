@@ -1,4 +1,8 @@
 import { useState } from "react";
+import axios from "axios";
+import { mostrarAlertaExito, mostrarAlertaError } from "../../../utils/alerts";
+
+const API_URL = import.meta.env.VITE_API_AIRSAFE_COMPRADOR_URL + "/create";
 
 export function useRegisterViewModel() {
     const [formData, setFormData] = useState({
@@ -25,9 +29,7 @@ export function useRegisterViewModel() {
         }
     };
     
-
     const togglePasswordVisibility = () => {
-        
         setShowPassword(!showPassword);
     };
 
@@ -35,9 +37,40 @@ export function useRegisterViewModel() {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Datos enviados:", formData);
+
+        if (formData.password !== formData.confirmPassword) {
+            alert("Las contraseñas no coinciden.");
+            return;
+        }
+
+        const dataToSend = {
+            usuario: formData.nombre,
+            email: formData.email,
+            telefono: formData.telefono,
+            contrasena: formData.password,
+        };
+
+        try {
+            const response = await axios.post(API_URL, dataToSend, {
+                headers: { "Content-Type": "application/json" }
+            });
+
+            console.log("Registro exitoso:", response.data);
+            mostrarAlertaExito("¡Usuario creado con éxito!", "Tu cuenta se ha registrado correctamente.");
+            
+            setFormData({
+                nombre: "",
+                email: "",
+                telefono: "",
+                password: "",
+                confirmPassword: "",
+            });
+        } catch (error) {
+            console.error("Error al registrar:", error.response ? error.response.data : error.message);
+            mostrarAlertaError("Error al registrar", "Intenta de nuevo más tarde.");
+        }
     };
 
     return {
