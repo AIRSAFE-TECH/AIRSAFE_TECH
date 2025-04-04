@@ -2,6 +2,7 @@ import Section from "../molecules/Section";
 import Text from "../atoms/Text";
 import UserList from "../organisms/UserList";
 import useUserViewModel from "../../viewmodel/user/useUserViewModel";
+import Swal from "sweetalert2";
 
 export default function UsersPage() {
     const { users, admins, loading, error } = useUserViewModel();
@@ -15,11 +16,33 @@ export default function UsersPage() {
     }
 
     const handleEdit = (id) => {
-        alert(`Editando usuario con ID: ${id}`);
+        Swal.fire({
+            title: 'Editar usuario',
+            text: `¿Estás seguro de que deseas editar el usuario con ID: ${id}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, editar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                alert(`Usuario con ID: ${id} editado.`);
+            }
+        });
     };
 
     const handleDelete = (id) => {
-        alert(`Eliminando usuario con ID: ${id}`);
+        Swal.fire({
+            title: 'Eliminar usuario',
+            text: `¿Estás seguro de que deseas eliminar el usuario con ID: ${id}?`,
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                alert(`Usuario con ID: ${id} eliminado.`);
+            }
+        });
     };
 
     return (
