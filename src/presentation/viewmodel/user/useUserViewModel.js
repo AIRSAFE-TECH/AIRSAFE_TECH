@@ -12,14 +12,16 @@ export default function useUserViewModel() {
             setLoading(true);
             setError(null);
 
-            const usersResponse = await axios.get("http://localhost:8080/comprador");
-            const usersData = usersResponse.data;
+            const ADMIN_URL = import.meta.env.VITE_API_AIRSAFE_ADMIN_URL;
+            const COMPRADOR_URL = import.meta.env.VITE_API_AIRSAFE_COMPRADOR_URL;
 
-            const adminsResponse = await axios.get("http://localhost:8080/admin");
-            const adminsData = adminsResponse.data;
+            const [usersResponse, adminsResponse] = await Promise.all([
+                axios.get(COMPRADOR_URL),
+                axios.get(ADMIN_URL),
+            ]);
 
-            setUsers(usersData);
-            setAdmins(adminsData);
+            setUsers(Array.isArray(usersResponse.data) ? usersResponse.data : []);
+            setAdmins(Array.isArray(adminsResponse.data) ? adminsResponse.data : []);
         } catch (error) {
             setError("Error al obtener los datos de los usuarios.");
         } finally {

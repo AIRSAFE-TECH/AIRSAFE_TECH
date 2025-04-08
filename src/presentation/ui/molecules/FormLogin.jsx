@@ -10,6 +10,8 @@ function FormLogin() {
 
     return (
         <form onSubmit={handleSubmit} className="grid gap-6">
+            
+            <h2 className="text-3xl font-bold text-[#266bb4] text-center">AIRSAFE TECH</h2>
             <h2 className="text-2xl font-bold text-[#266bb4] text-center">Iniciar sesión</h2>
 
             {error && <p className="text-red-600 text-center">{error}</p>}

@@ -8,21 +8,21 @@ export default function UsersPage() {
     const { users, admins, loading, error } = useUserViewModel();
 
     if (loading) {
-        return <div>Cargando...</div>;
+        return <div className="text-center text-lg font-semibold text-custom-darkest-blue">Cargando...</div>;
     }
 
     if (error) {
-        return <div>{error}</div>;
+        return <div className="text-center text-red-500">{error}</div>;
     }
 
     const handleEdit = (id) => {
         Swal.fire({
-            title: 'Editar usuario',
+            title: "Editar usuario",
             text: `¿Estás seguro de que deseas editar el usuario con ID: ${id}?`,
-            icon: 'warning',
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonText: 'Sí, editar',
-            cancelButtonText: 'Cancelar',
+            confirmButtonText: "Sí, editar",
+            cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
                 alert(`Usuario con ID: ${id} editado.`);
@@ -32,12 +32,12 @@ export default function UsersPage() {
 
     const handleDelete = (id) => {
         Swal.fire({
-            title: 'Eliminar usuario',
+            title: "Eliminar usuario",
             text: `¿Estás seguro de que deseas eliminar el usuario con ID: ${id}?`,
-            icon: 'error',
+            icon: "error",
             showCancelButton: true,
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar',
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.isConfirmed) {
                 alert(`Usuario con ID: ${id} eliminado.`);
@@ -46,13 +46,13 @@ export default function UsersPage() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100 p-10">
+        <div className="min-h-screen flex flex-col p-10">
             <Section title="👥 Lista de Usuarios y Administradores">
                 <Text
                     text="Aquí puedes ver todos los usuarios y administradores registrados en la plataforma."
-                    className="mt-4 text-lg max-w-2xl mx-auto"
+                    className="mt-4 text-lg max-w-2xl mx-auto text-custom-dark-blue"
                 />
-                <UserList users={users} admins={admins} onEdit={handleEdit} onDelete={handleDelete} />
+                <UserList users={users || []} admins={admins || []} onEdit={handleEdit} onDelete={handleDelete} />
             </Section>
         </div>
     );

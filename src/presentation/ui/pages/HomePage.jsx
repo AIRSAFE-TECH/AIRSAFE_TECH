@@ -11,13 +11,6 @@ function HomePage() {
                 />
             </Section>
 
-            <Section title="📡 ¿Qué es nuestro producto?">
-                <Text
-                    text="Nuestro dispositivo está diseñado para prevenir fugas de gas en tu hogar, y viene con un cerrador de válvulas automático que actúa en caso de detectar una fuga. Ideal para garantizar la seguridad en casas y comercios."
-                    className="mt-4 max-w-3xl mx-auto"
-                />
-            </Section>
-
             <Section title="⚙️ ¿Cómo instalarlo en tu hogar?">
                 <Text text="Sigue estos simples pasos para instalar nuestro dispositivo:" className="mt-2" />
 

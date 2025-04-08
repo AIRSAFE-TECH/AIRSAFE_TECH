@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <footer className="bg-gray-900 text-white p-6 text-center">
+        <footer className="bg-custom-dark-blue text-white p-6 text-center">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <div>
@@ -15,10 +15,16 @@ function Footer() {
 
                 <div>
                     <h2 className="text-lg font-semibold mb-2">Síguenos</h2>
-                    <div className="flex justify-center space-x-4 text-xl">
-                        <a href="#" className="hover:text-blue-400">📘</a> 
-                        <a href="#" className="hover:text-blue-500">🐦</a> 
-                        <a href="#" className="hover:text-red-500">📷</a> 
+                    <div className="flex justify-center space-x-4">
+                        <a href="#" className="hover:opacity-80 transition">
+                            <img src="/media/icons/facebook.png" alt="Facebook" className="w-8 h-8" />
+                        </a>
+                        <a href="#" className="hover:opacity-80 transition">
+                            <img src="/media/icons/twitter.png" alt="Twitter" className="w-8 h-8" />
+                        </a>
+                        <a href="#" className="hover:opacity-80 transition">
+                            <img src="/media/icons/instagram.png" alt="Instagram" className="w-8 h-8" />
+                        </a>
                     </div>
                 </div>
 

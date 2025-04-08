@@ -12,17 +12,23 @@ function EmergencyPage() {
                 <div className="mt-4 space-y-4">
                     <div className="p-4 border rounded-md shadow-sm bg-gray-100">
                         <Text text="🚑 Ambulancia: 911" className="font-semibold" />
-                        <Button text="Llamar" className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition" />
+                        <a href="tel:911">
+                            <Button text="Llamar" className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition" />
+                        </a>
                     </div>
 
                     <div className="p-4 border rounded-md shadow-sm bg-gray-100">
                         <Text text="🚓 Policía: 911" className="font-semibold" />
-                        <Button text="Llamar" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition" />
+                        <a href="tel:911">
+                            <Button text="Llamar" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition" />
+                        </a>
                     </div>
 
                     <div className="p-4 border rounded-md shadow-sm bg-gray-100">
                         <Text text="🔥 Bomberos: 911" className="font-semibold" />
-                        <Button text="Llamar" className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition" />
+                        <a href="tel:911">
+                            <Button text="Llamar" className="w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition" />
+                        </a>
                     </div>
                 </div>
             </div>
