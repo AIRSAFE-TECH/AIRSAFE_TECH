@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+import { UserApiDataSource } from "../../../data/dataSource/UserApiDataSource";
+import { UserRepositoryImpl } from "../../../data/repository/UserRepositoryImpl.js";
+import { LoginUserUseCase } from "../../../domain/useCases/LoginUserUseCase";
+
 import { mostrarAlertaExito, mostrarAlertaError } from "../../../utils/alerts";
 import { LOGIN_SUCCESS, LOGIN_FAILED } from "../../../utils/messages";
-
-const API_URL = import.meta.env.VITE_API_AIRSAFE_URL.replace(/\/$/, "");
 
 export function useLoginViewModel() {
     const [formData, setFormData] = useState({
@@ -23,7 +25,7 @@ export function useLoginViewModel() {
     };
 
     const togglePasswordVisibility = () => {
-        setShowPassword((prev) => !prev);
+        setShowPassword(prev => !prev);
     };
 
     const handleSubmit = async (e) => {
@@ -32,22 +34,19 @@ export function useLoginViewModel() {
         setError(null);
 
         try {
-            const response = await axios.post(`${API_URL}/auth/login`, formData, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            const api = new UserApiDataSource();
+            const repo = new UserRepositoryImpl(api);
+            const loginUseCase = new LoginUserUseCase(repo);
 
-            const data = response.data;
+            const userEntity = await loginUseCase.execute(formData);
 
-            if (data.token) {
-                sessionStorage.setItem("token", data.token);
-                sessionStorage.setItem("user", JSON.stringify(data.user));
-                sessionStorage.setItem("role", JSON.stringify(data.role));
-                sessionStorage.setItem("id", JSON.stringify(data.id));
+            if (userEntity.token) {
+                sessionStorage.setItem("token", userEntity.token);
+                sessionStorage.setItem("user", JSON.stringify(userEntity.user));
+                sessionStorage.setItem("role", JSON.stringify(userEntity.role));
+                sessionStorage.setItem("id", JSON.stringify(userEntity.id));
 
                 mostrarAlertaExito(LOGIN_SUCCESS.titulo, LOGIN_SUCCESS.texto);
-
                 navigate("/home");
             } else {
                 throw new Error("No se recibió token");
@@ -56,7 +55,6 @@ export function useLoginViewModel() {
         } catch (err) {
             const message = err.response?.data?.message || LOGIN_FAILED.texto;
             setError(message);
-
             mostrarAlertaError(LOGIN_FAILED.titulo, message);
         } finally {
             setLoading(false);
